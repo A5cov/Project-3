@@ -1,0 +1,113 @@
+import time
+import random
+from random import randint
+from Tkinter import *
+import io
+import base64
+import Tkinter as tk
+from urllib2 import urlopen
+
+class landmarks:
+    def __init__(self,name,id,treasure,x1,x2,y1,y2,picture):
+
+#This function creates the landmarks
+        
+         self.name = name
+         self.treasure = treasure
+         self.x1 = x1
+         self.x2 = x2
+         self.y1 = y1
+         self.y2 = y2
+         self.picture = picture
+    def location(self,x1,y1,x2,y2,picture):
+
+#This function randomly selects the placement of the landmarks
+        
+        x1 = x1 + randint(0,293)
+        x2 = x1 + 20
+        y1 = randint(0,580)
+        y2 = y1 + 20
+        canvas.create_image(x1,y1,image=picture,anchor=NW)
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+
+
+#This is where the window is created with the backgrounds the labels for points included
+
+window = Tk()
+canvas = Canvas(window, width=999, height=650, bg='white')
+desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))
+city = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/X6xnrbm.gif").read()))
+snow = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/2ICSPuc.gif").read()))
+canvas.create_image(0,0,image=desert, anchor=NW)
+canvas.create_image(333,0,image=city, anchor=NW)
+canvas.create_image(666,0,image=snow, anchor=NW)
+canvas.create_rectangle(0,600,999,650,fill='white')
+canvas.create_line(0,600,999,600)
+canvas.create_line(500,600,500,650)
+labelPhilPoints = Label(text="Phil's Points: ",fg="black",bg="white").place(x=30,y=610)
+labelSebastionPoints = Label(text="Sebastion's Points: ",fg="black",bg="white").place(x=530,y=610)
+canvas.pack()
+
+#Here the images for the landmarks are assigned to the appropriate variable
+
+Pyramid1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/DPm4BlQ.gif").read()))
+Sphinx1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/zBoh417.gif").read()))
+Valley1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/nPSdVxM.gif").read()))
+LondonEye1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/tBZQWaw.gif").read()))
+Statue1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/RG3GrAP.gif").read()))
+Eiffel1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/WU0Ij7U.gif").read()))
+NorthPole1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/Jr3EISg.gif").read()))
+Everest1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/7rkkGcg.gif").read()))
+Basil1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6ZK0fy3.gif").read()))
+
+#Here the landmarks function is called for each of the landmarks which is used to create the objects
+
+Pyramid = landmarks("Pyramid", 1, 0, 0, 0, 0, 0, Pyramid1)
+Sphinx = landmarks("Sphinx", 2, 0, 0, 0, 0, 0, Sphinx1)
+ValleyoftheKings = landmarks("Valley of the Kings", 3, 0, 0, 0, 0, 0, Valley1)
+LondonEye = landmarks("London Eye", 4, 0, 333, 0, 0, 0, LondonEye1)
+StatueofLiberty = landmarks("Statue of Liberty", 5, 0, 333, 0, 0, 0, Statue1)
+EiffelTower = landmarks("Eiffel Tower", 6, 0, 333, 0, 0, 0, Eiffel1)
+NorthPole = landmarks("North Pole", 7, 0, 666, 0, 0, 0, NorthPole1)
+MountEverest = landmarks("Mount Everest", 8, 0, 666, 0, 0, 0, Everest1)
+StBasilsCathedral = landmarks("St.Basil's Cathedral", 9, 0, 666, 0, 0, 0, Basil1)
+
+#The location function below is called which randomly selects the positions of the landmarks in their respective zones
+
+Pyramid.location(Pyramid.x1,Pyramid.y1,Pyramid.x2,Pyramid.y2,Pyramid.picture)
+Sphinx.location(Sphinx.x1,Sphinx.y1,Sphinx.x2,Sphinx.y2,Sphinx.picture)
+ValleyoftheKings.location(ValleyoftheKings.x1,ValleyoftheKings.y1,ValleyoftheKings.x2,ValleyoftheKings.y2,ValleyoftheKings.picture)
+LondonEye.location(LondonEye.x1,LondonEye.y1,LondonEye.x2,LondonEye.y2,LondonEye.picture)
+StatueofLiberty.location(StatueofLiberty.x1,StatueofLiberty.y1,StatueofLiberty.x2,StatueofLiberty.y2,StatueofLiberty.picture)
+EiffelTower.location(EiffelTower.x1,EiffelTower.y1,EiffelTower.x2,EiffelTower.y2,EiffelTower.picture)
+NorthPole.location(NorthPole.x1,NorthPole.y1,NorthPole.x2,NorthPole.y2,NorthPole.picture)
+MountEverest.location(MountEverest.x1,MountEverest.y1,MountEverest.x2,MountEverest.y2,MountEverest.picture)
+StBasilsCathedral.location(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCathedral.x2,StBasilsCathedral.y2,StBasilsCathedral.picture)
+
+
+def Close():
+    Webs.withdraw()
+
+Webs = Toplevel()
+Webs.title("Pyramid")
+
+#50 spaces either side
+
+L1 = Label(Webs, text = "                                                  Treasure:                                                  ")
+L1.pack()
+E1 = Entry(Webs, bd = 10)
+E1.pack()
+ 
+L2 = Label(Webs, text = "Points:")
+L2.pack()
+E2 = Entry(Webs, bd = 10)
+E2.pack()
+
+buttondone = Button(Webs, text = "Done", command = Close)
+buttondone.pack()
+
+window.mainloop()
