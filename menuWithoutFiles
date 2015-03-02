@@ -1,0 +1,42 @@
+import sys
+from Tkinter import *
+import os
+mGui = Tk()
+
+
+def openFile():
+  try:
+        os.startfile("C:\Users\User\Desktop\Advanced.py")
+
+    except Exception, e:
+        print str(e)
+
+
+
+
+mGui.geometry("450x450+400+150")
+mGui.title("Main Menu")
+
+mLabel = Label(text="Select Level")
+mLabel.pack()
+
+mLabel2 = Label(text="    ")
+mLabel2.pack()
+
+mButton = Button(text="Basic", command = openFile())
+mButton.pack()
+
+mLabel3 = Label(text="    ")
+mLabel3.pack()
+
+mButton2 = Button(text="Intermediate")
+mButton2.pack()
+
+mLabel4 = Label(text="    ")
+mLabel4.pack()
+
+mButton3 = Button(text="Advanced")
+mButton3.pack()
+
+
+mainloop()
