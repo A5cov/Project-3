@@ -5,11 +5,7 @@ mGui = Tk()
 
 
 def openFile():
-  try:
-        os.startfile("C:\Users\User\Desktop\Advanced.py")
-
-    except Exception, e:
-        print str(e)
+    os.startfile("C:\Users\wassaa2\Downloads\Robot Advanced Code Update.py")
 
 
 
@@ -23,19 +19,19 @@ mLabel.pack()
 mLabel2 = Label(text="    ")
 mLabel2.pack()
 
-mButton = Button(text="Basic", command = openFile())
+mButton = Button(text="Basic", command = openFile)
 mButton.pack()
 
 mLabel3 = Label(text="    ")
 mLabel3.pack()
 
-mButton2 = Button(text="Intermediate")
+mButton2 = Button(text="Intermediate", command = openFile)
 mButton2.pack()
 
 mLabel4 = Label(text="    ")
 mLabel4.pack()
 
-mButton3 = Button(text="Advanced")
+mButton3 = Button(text="Advanced", command = openFile)
 mButton3.pack()
 
 
