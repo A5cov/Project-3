@@ -1,0 +1,270 @@
+import time
+import random
+from random import randint
+from Tkinter import*
+import io
+import base64
+import Tkinter as tk
+from urllib2 import urlopen
+
+class landmarks:
+    def __init__(self,name,id,treasure,x1,x2,y1,y2,picture):
+         self.name = name
+         self.id = id
+         self.treasure = treasure
+         self.x1 = x1
+         self.x2 = x2
+         self.y1 = y1
+         self.y2 = y2
+         self.picture = picture
+    def location(self,x1,y1,x2,y2,picture):
+        x1 = x1 + randint(0,273)
+        x2 = x1 + 20
+        y1 = randint(0,540)
+        y2 = y1 + 20
+        canvas.create_image(x1,y1,image=picture,anchor=NW)
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+
+class Traps:
+    def __init__(self,name,id,effect,x1,y1,x2,y2):
+        self.name = name
+        self.id = id
+        self.effect = effect
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+    def trapLocation(self, x1,y1,x2,y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        x1 = x1 + randint(0,293)
+        x2 = x1 + 40
+        y1 = randint(0,580)
+        y2 = y1 + 40
+        canvas.create_rectangle(x1,y1,x2,y2,outline="black",width=1)
+        canvas.update()
+
+class Robot:
+    def __init__(self,name,id,treasure,x1,y1,x2,y2, position, direction):
+        self.name = name
+        self.id = id
+        self.treasure = treasure
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.position = position
+        self.direction = direction
+    def createRobot(self,x1,y1,x2,y2,colour, position):
+        x1 = x1 + 200
+        x2 = x1 + 20
+        y1 = y1 + 200
+        y2 = y1 + 20
+        self.colour = colour
+        self.position=canvas.create_rectangle(x1,y1,x2,y2,fill=colour,outline="black")
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+    def RobotMove(self, x1, y1, x2, y2, position, direction):
+        if direction == 0:
+            canvas.coords(position,x1-1,y1,x2-1,y2)
+            self.x1 = x1 - 1
+            self.x2 = x2 - 1
+            time.sleep(0.003)
+        elif direction == 1:
+            canvas.coords(position,x1,y1-1,x2,y2-1)
+            self.y1 = y1 - 1
+            self.y2 = y2 - 1
+            time.sleep(0.003)
+        elif direction == 2:
+            canvas.coords(position,x1+1,y1,x2+1,y2)
+            self.x1 = x1 + 1
+            self.x2 = x2 + 1
+            time.sleep(0.003)
+        elif direction == 3:
+            canvas.coords(position,x1,y1+1,x2,y2+1)
+            self.y1 = y1 + 1
+            self.y2 = y2 + 1
+            time.sleep(0.003)
+        
+
+window = Tk()
+canvas = Canvas(window, width=999, height=650, bg='white')
+desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))
+city = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/X6xnrbm.gif").read()))
+snow = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/2ICSPuc.gif").read()))
+canvas.create_image(0,0,image=desert, anchor=NW)
+canvas.create_image(333,0,image=city, anchor=NW)
+canvas.create_image(666,0,image=snow, anchor=NW)
+canvas.create_rectangle(0,600,999,650,fill='white')
+canvas.create_line(0,600,999,600)
+canvas.create_line(500,600,500,650)
+labelPhilPoints = Label(text="Phil's Points: ",fg="black",bg="white").place(x=30,y=610)
+labelSebastionPoints = Label(text="Sebastion's Points: ",fg="black",bg="white").place(x=530,y=610)
+
+canvas.pack()
+
+#Images thanks to Drago Art
+
+Pyramid1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/SXN9yaL.gif").read()))
+Sphinx1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/BzA9MTn.gif").read()))
+Valley1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/LzXQAOL.gif").read()))
+GrandCanyon1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/LzXQAOL.gif").read()))
+LondonEye1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/tBZQWaw.gif").read()))
+Statue1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/sFE9F00.gif").read()))
+Eiffel1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/R6EyJ2E.gif").read()))
+BigBen1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/IMDhEcQ.gif").read()))
+NorthPole1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/Jr3EISg.gif").read()))
+Everest1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/7rkkGcg.gif").read()))
+Basil1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6ZK0fy3.gif").read()))
+Glacier1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/LzXQAOL.gif").read()))
+
+Phil = Robot("Phil",1,"",0,0,0,0,"",0)
+
+trap1 = Traps("Trap1","",1,0,0,0,0)
+trap2 = Traps("Trap2","",2,0,0,0,0)
+trap3 = Traps("Trap3","",3,333,0,0,0)
+trap4 = Traps("Trap4","",4,333,0,0,0)
+trap5 = Traps("Trap5","",5,666,0,0,0)
+trap6 = Traps("Trap6","",6,666,0,0,0)
+
+Pyramid = landmarks("Pyramid", 1, 0, 0, 0, 0, 0, Pyramid1)
+Sphinx = landmarks("Sphinx", 2, 0, 0, 0, 0, 0, Sphinx1)
+ValleyoftheKings = landmarks("Valley of the Kings", 3, 0, 0, 0, 0, 0, Valley1)
+GrandCanyon = landmarks("Grand Canyon", 4, 0, 0, 0, 0, 0, GrandCanyon1)
+LondonEye = landmarks("London Eye", 5, 0, 333, 0, 0, 0, LondonEye1)
+StatueofLiberty = landmarks("Statue of Liberty", 6, 0, 333, 0, 0, 0, Statue1)
+EiffelTower = landmarks("Eiffel Tower", 7, 0, 333, 0, 0, 0, Eiffel1)
+BigBen = landmarks("Big Ben", 8, 0, 333, 0, 0, 0, BigBen1)
+NorthPole = landmarks("North Pole", 9, 0, 666, 0, 0, 0, NorthPole1)
+MountEverest = landmarks("Mount Everest", 10, 0, 666, 0, 0, 0, Everest1)
+StBasilsCathedral = landmarks("St.Basil's Cathedral", 11, 0, 666, 0, 0, 0, Basil1)
+Glacier = landmarks("Glacier", 12, 0, 666, 0, 0, 0, Glacier1)
+
+trap1.trapLocation(trap1.x1,trap1.y1,trap1.x2,trap1.y2)
+trap2.trapLocation(trap2.x1,trap2.y1,trap2.x2,trap2.y2)
+trap3.trapLocation(trap3.x1,trap3.y1,trap3.x2,trap3.y2)
+trap4.trapLocation(trap4.x1,trap4.y1,trap4.x2,trap4.y2)
+trap5.trapLocation(trap5.x1,trap5.y1,trap5.x2,trap5.y2)
+trap6.trapLocation(trap6.x1,trap6.y1,trap6.x2,trap6.y2)
+
+Phil.createRobot(Phil.x1,Phil.y1,Phil.x2,Phil.x2,"yellow",0)
+canvas.update()
+
+
+Pyramid.location(Pyramid.x1,Pyramid.y1,Pyramid.x2,Pyramid.y2,Pyramid.picture)
+Sphinx.location(Sphinx.x1,Sphinx.y1,Sphinx.x2,Sphinx.y2,Sphinx.picture)
+ValleyoftheKings.location(ValleyoftheKings.x1,ValleyoftheKings.y1,ValleyoftheKings.x2,ValleyoftheKings.y2,ValleyoftheKings.picture)
+GrandCanyon.location(GrandCanyon.x1,GrandCanyon.y1,GrandCanyon.x2,GrandCanyon.y2,GrandCanyon.picture)
+LondonEye.location(LondonEye.x1,LondonEye.y1,LondonEye.x2,LondonEye.y2,LondonEye.picture)
+StatueofLiberty.location(StatueofLiberty.x1,StatueofLiberty.y1,StatueofLiberty.x2,StatueofLiberty.y2,StatueofLiberty.picture)
+EiffelTower.location(EiffelTower.x1,EiffelTower.y1,EiffelTower.x2,EiffelTower.y2,EiffelTower.picture)
+BigBen.location(BigBen.x1,BigBen.y1,BigBen.x2,BigBen.y2,BigBen.picture)
+NorthPole.location(NorthPole.x1,NorthPole.y1,NorthPole.x2,NorthPole.y2,NorthPole.picture)
+MountEverest.location(MountEverest.x1,MountEverest.y1,MountEverest.x2,MountEverest.y2,MountEverest.picture)
+StBasilsCathedral.location(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCathedral.x2,StBasilsCathedral.y2,StBasilsCathedral.picture)
+Glacier.location(Glacier.x1,Glacier.y1,Glacier.x2,Glacier.y2,Glacier.picture)
+
+atdestination = False
+PhilDestination = Pyramid
+itsatrap = trap1
+treasureCount = 6
+z = 0
+L = 0
+n = 0
+holder = 1
+nodes=[0,1,2,3,4,5,6,7,8,9,10,11,12]
+length=8
+
+while atdestination == False:
+    if Phil.x1 > PhilDestination.x1:
+        Phil.direction = 0
+    elif Phil.x1 < PhilDestination.x1:
+        Phil.direction = 2
+    elif Phil.y1 > PhilDestination.y1:
+        Phil.direction = 1
+    elif Phil.y2 < PhilDestination.y2:
+        Phil.direction = 3
+
+
+    Phil.RobotMove(Phil.x1,Phil.y1,Phil.x2,Phil.y2,Phil.position,Phil.direction)
+    canvas.update()
+
+
+    if Phil.x1 == PhilDestination.x1 and Phil.y1 == PhilDestination.y1:
+        n = PhilDestination.id
+        nodes[n] = 0
+                
+        x = True
+        z = 0
+        while x == True:
+            z = z + 1
+            n = randint(0, 12)
+            y = nodes[n]
+            if y == 0:
+                x = True
+                if z == 50:
+                    x = False
+            else:   
+                x = False
+        
+        if Pyramid.id == y:
+            PhilDestination = Pyramid
+            print "Pyramid"
+        elif Sphinx.id == y:
+            PhilDestinaton = Sphinx
+            print "Sphinx"
+        elif ValleyoftheKings.id == y:
+            PhilDestination = ValleyoftheKings
+            print "Valley"
+        elif GrandCanyon.id == y:
+            PhilDestination = GrandCanyon
+            print "canyon"
+        elif LondonEye.id == y:
+            PhilDestination = LondonEye
+            print "London"
+        elif StatueofLiberty.id == y:
+            PhilDestination = StatueofLiberty
+            print "Statue"
+        elif EiffelTower.id == y:
+            PhilDestination = EiffelTower
+            print "Eiffel"
+        elif BigBen.id == y:
+            PhilDestination = BigBen
+            print "bigBen"
+        elif NorthPole.id == y:
+            PhilDestination = NorthPole
+            print "NorthPole"
+        elif MountEverest.id == y:
+            PhilDestination = MountEverest
+            print "everest"
+        elif StBasilsCathedral.id == y:
+            PhilDestination = StBasilsCathedral
+            print "basil"
+        elif(Phil.x1 >= trap1.x1) and (Phil.y1 >= trap1.y1) or (Phil.x2 <= trap1.x2) and (Phil.y2 <= trap1.y2):
+            print "ITS A TRAP"
+        elif (Phil.x1 >= trap2.x1) and (Phil.y1 >= trap2.y1) or (Phil.x2 <= trap2.x2) and (Phil.y2 <= trap2.y2):
+            print "ITS A TRAP"
+        elif (Phil.x1 >= trap3.x1) and (Phil.y1 >= trap3.y1) or (Phil.x2 <= trap3.x2) and (Phil.y2 <= trap3.y2):
+            print "ITS A TRAP"
+        elif (Phil.x1 >= trap4.x1) and (Phil.y1 >= trap4.y1) or (Phil.x2 <= trap4.x2) and (Phil.y2 <= trap4.y2):
+            print "ITS A TRAP"
+        elif (Phil.x1 >= trap5.x1) and (Phil.y1 >= trap5.y1) or (Phil.x2 <= trap5.x2) and (Phil.y2 <= trap5.y2):
+            print "ITS A TRAP"
+        elif (Phil.x1 >= trap6.x1) and (Phil.y1 >= trap6.y1) or (Phil.x2 <= trap6.x2) and (Phil.y2 <= trap6.y2):
+            print "ITS A TRAP"
+            
+        atdestination = True
+        for x in range(0, 12):
+            if nodes[x] > 0:
+                atdestination = False
+
+window.mainloop()
