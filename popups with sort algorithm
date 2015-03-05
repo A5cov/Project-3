@@ -1,0 +1,327 @@
+import time
+import random
+from random import randint
+from Tkinter import *
+import io
+import base64
+import Tkinter as tk
+from urllib2 import urlopen
+
+class landmarks:
+    def __init__(self,name,id,treasure,x1,x2,y1,y2,picture,points):
+#This function creates the landmarks
+        
+        self.name = name
+        self.treasure = treasure
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        self.picture = picture
+        self.points = points
+    def location(self,x1,y1,x2,y2,picture):
+        
+#This function randomly selects the placement of the landmarks
+        
+        x1 = x1 + randint(0,293)
+        x2 = x1 + 20
+        y1 = randint(0,580)
+        y2 = y1 + 20
+        canvas.create_image(x1,y1,image=picture,anchor=NW)
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+
+        
+#This is where the window is created with the backgrounds the labels for points included
+        
+window = Tk()
+canvas = Canvas(window, width=999, height=650, bg='white')
+desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))
+city = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/X6xnrbm.gif").read()))
+snow = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/2ICSPuc.gif").read()))
+canvas.create_image(0,0,image=desert, anchor=NW)
+canvas.create_image(333,0,image=city, anchor=NW)
+canvas.create_image(666,0,image=snow, anchor=NW)
+canvas.create_rectangle(0,600,999,650,fill='white')
+canvas.create_line(0,600,999,600)
+canvas.create_line(500,600,500,650)
+labelPhilPoints = Label(text="Phil's Points: ",fg="black",bg="white").place(x=30,y=610)
+labelSebastionPoints = Label(text="Sebastion's Points: ",fg="black",bg="white").place(x=530,y=610)
+canvas.pack()
+
+#Here the images for the landmarks are assigned to the appropriate variable
+
+Pyramid1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/DPm4BlQ.gif").read()))
+Sphinx1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/zBoh417.gif").read()))
+Valley1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/nPSdVxM.gif").read()))
+LondonEye1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/tBZQWaw.gif").read()))
+Statue1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/RG3GrAP.gif").read()))
+Eiffel1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/WU0Ij7U.gif").read()))
+NorthPole1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/Jr3EISg.gif").read()))
+Everest1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/7rkkGcg.gif").read()))
+Basil1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6ZK0fy3.gif").read()))
+
+#Here the landmarks function is called for each of the landmarks which is used to create the objects
+
+Pyramid = landmarks("Pyramid", 1, 0, 0, 0, 0, 0, Pyramid1, 0)
+Sphinx = landmarks("Sphinx", 2, 0, 0, 0, 0, 0, Sphinx1, 0)
+ValleyoftheKings = landmarks("Valley of the Kings", 3, 0, 0, 0, 0, 0, Valley1, 0)
+LondonEye = landmarks("London Eye", 4, 0, 333, 0, 0, 0, LondonEye1, 0)
+StatueofLiberty = landmarks("Statue of Liberty", 5, 0, 333, 0, 0, 0, Statue1, 0)
+EiffelTower = landmarks("Eiffel Tower", 6, 0, 333, 0, 0, 0, Eiffel1, 0)
+NorthPole = landmarks("North Pole", 7, 0, 666, 0, 0, 0, NorthPole1, 0)
+MountEverest = landmarks("Mount Everest", 8, 0, 666, 0, 0, 0, Everest1, 0)
+StBasilsCathedral = landmarks("St.Basil's Cathedral", 9, 0, 666, 0, 0, 0, Basil1, 0)
+
+#The location function below is called which randomly selects the positions of the landmarks in their respective zones
+
+Pyramid.location(Pyramid.x1,Pyramid.y1,Pyramid.x2,Pyramid.y2,Pyramid.picture)
+Sphinx.location(Sphinx.x1,Sphinx.y1,Sphinx.x2,Sphinx.y2,Sphinx.picture)
+ValleyoftheKings.location(ValleyoftheKings.x1,ValleyoftheKings.y1,ValleyoftheKings.x2,ValleyoftheKings.y2,ValleyoftheKings.picture)
+LondonEye.location(LondonEye.x1,LondonEye.y1,LondonEye.x2,LondonEye.y2,LondonEye.picture)
+StatueofLiberty.location(StatueofLiberty.x1,StatueofLiberty.y1,StatueofLiberty.x2,StatueofLiberty.y2,StatueofLiberty.picture)
+EiffelTower.location(EiffelTower.x1,EiffelTower.y1,EiffelTower.x2,EiffelTower.y2,EiffelTower.picture)
+NorthPole.location(NorthPole.x1,NorthPole.y1,NorthPole.x2,NorthPole.y2,NorthPole.picture)
+MountEverest.location(MountEverest.x1,MountEverest.y1,MountEverest.x2,MountEverest.y2,MountEverest.picture)
+StBasilsCathedral.location(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCathedral.x2,StBasilsCathedral.y2,StBasilsCathedral.picture)
+
+number = 0
+Webs = Toplevel()
+Webs1 = Toplevel()
+Webs1.withdraw()
+Webs2 = Toplevel()
+Webs2.withdraw()
+Webs3 = Toplevel()
+Webs3.withdraw()
+Webs4 = Toplevel()
+Webs4.withdraw()
+Webs5 = Toplevel()
+Webs5.withdraw()
+Webs6 = Toplevel()
+Webs6.withdraw()
+Webs7 = Toplevel()
+Webs7.withdraw()
+Webs8 = Toplevel()
+Webs8.withdraw()
+L1 = Label(Webs1, text = " Treasure: ")
+E1 = Entry(Webs1, bd = 10)
+var2 = StringVar(Webs1)
+option = OptionMenu(Webs1, var2, "100", "200", "500", "750")
+L2 = Label(Webs, text = "Points:")
+E2 = Entry(Webs, bd = 10)
+var = StringVar(Webs)
+option = OptionMenu(Webs, var, "10", "20", "50", "75")
+
+
+def CreateWindow(name, namenotstring, number):
+
+    if number == 0:
+        Webs.title(name)
+    elif number == 1:
+        Webs1.title(name)
+    elif number == 2:
+        Webs2.title(name)
+    elif number == 3:
+        Webs3.title(name)
+    elif number == 4:
+        Webs4.title(name)
+    elif number == 5:
+        Webs5.title(name)
+    elif number == 6:
+        Webs6.title(name)
+    elif number == 7:
+        Webs7.title(name)
+    elif number == 8:
+        Webs8.title(name)
+
+
+    
+#50 spaces either side
+
+    if number == 0:
+        var = StringVar(Webs)
+        var.set("10")
+        L1 = Label(Webs, text = "               Treasure:               ")
+        E1 = Entry(Webs, bd = 10)
+        L2 = Label(Webs, text = "Points:")
+        option = OptionMenu(Webs, var, "10", "20", "50", "75")
+        Pyramid.points = var.get()
+        buttondone = Button(Webs, text = "Done", command = Close)
+        labeltreasure = Label(text="Pyramid:"+str(var.get()) ,fg="black",bg="white").place(x=30,y=630)
+    elif number == 1:
+        var = StringVar(Webs1)
+        var.set("10")
+        L1 = Label(Webs1, text = "               Treasure:               ")
+        E1 = Entry(Webs1, bd =var.get())
+        L2 = Label(Webs1, text = "Points:")
+        E2 = Entry(Webs1, bd =10)
+        option = OptionMenu(Webs1, var, "10", "20", "50", "75")
+        Sphinx.points = var.get()
+        buttondone = Button(Webs1, text = "Done", command = Close)
+        labeltreasure = Label(text="Sphinx:"+str(var.get()) ,fg="black",bg="white").place(x=100,y=630)
+    elif number == 2:
+        var = StringVar(Webs2)
+        var.set("10")
+        L1 = Label(Webs2, text = "               Treasure:               ")
+        E1 = Entry(Webs2, bd = 10)
+        L2 = Label(Webs2, text = "Points:")
+        E2 = Entry(Webs2, bd = 10)
+        option = OptionMenu(Webs2, var, "10", "20", "50", "75")
+        ValleyoftheKings.points = var.get()
+        buttondone = Button(Webs2, text = "Done", command = Close)
+        labeltreasure = Label(text="Valley of the Kings:"+var.get() ,fg="black",bg="white").place(x=170,y=630) 
+    elif number == 3:
+        var = StringVar(Webs3)
+        var.set("10")
+        L1 = Label(Webs3, text = "               Treasure:               ")
+        E1 = Entry(Webs3, bd = 10)
+        L2 = Label(Webs3, text = "Points:")
+        E2 = Entry(Webs3, bd = 10)
+        option = OptionMenu(Webs3, var, "10", "20", "50", "75")
+        LondonEye.points = var.get()
+        buttondone = Button(Webs3, text = "Done", command = Close)
+        labeltreasure = Label(text="London Eye:"+var.get() ,fg="black",bg="white").place(x=290,y=630)
+                                                                                    
+    elif number == 4:
+        var = StringVar(Webs4)
+        var.set("10")
+        L1 = Label(Webs4, text = "               Treasure:               ")
+        E1 = Entry(Webs4, bd = 10)
+        L2 = Label(Webs4, text = "Points:")
+        E2 = Entry(Webs4, bd = 10)
+        option = OptionMenu(Webs4, var, "10", "20", "50", "75")
+        StatueofLiberty.points = var.get()
+        buttondone = Button(Webs4, text = "Done", command = Close)
+        labeltreasure = Label(text="Statue of Liberty:"+var.get() ,fg="black",bg="white").place(x=370,y=630)
+    elif number == 5:
+        var = StringVar(Webs5)
+        var.set("10")
+        L1 = Label(Webs5, text = "               Treasure:               ")
+        E1 = Entry(Webs5, bd = 10)
+        L2 = Label(Webs5, text = "Points:")
+        E2 = Entry(Webs5, bd = 10)
+        option = OptionMenu(Webs5, var, "10", "20", "50", "75")
+        EiffelTower.points = var.get()
+        buttondone = Button(Webs5, text = "Done", command = Close)
+        labeltreasure = Label(text="Eiffel Tower:"+var.get() ,fg="black",bg="white").place(x=480,y=630)
+    elif number == 6:
+        var = StringVar(Webs6)
+        var.set("10")
+        L1 = Label(Webs6, text = "               Treasure:               ")
+        E1 = Entry(Webs6, bd = 10)
+        L2 = Label(Webs6, text = "Points:")
+        E2 = Entry(Webs6, bd = 10)
+        option = OptionMenu(Webs6, var, "10", "20", "50", "75")
+        NorthPole.points = var.get()
+        buttondone = Button(Webs6, text = "Done", command = Close)
+        labeltreasure = Label(text="North Pole:"+str(var.get()) ,fg="black",bg="white").place(x=560,y=630)
+    elif number == 7:
+        var = StringVar(Webs7)
+        var.set("10")
+        L1 = Label(Webs7, text = "               Treasure:               ")
+        E1 = Entry(Webs7, bd = 10)
+        L2 = Label(Webs7, text = "Points:")
+        E2 = Entry(Webs7, bd = 10)
+        option = OptionMenu(Webs7, var, "10", "20", "50", "75")
+        MountEverest.points = var.get()
+        buttondone = Button(Webs7, text = "Done", command = Close)
+        labeltreasure = Label(text="Mount Everest:"+str(var.get()) ,fg="black",bg="white").place(x=640,y=630)
+    elif number == 8:
+        var = StringVar(Webs8)
+        var.set("10")
+        L1 = Label(Webs8, text = "               Treasure:               ")
+        E1 = Entry(Webs8, bd = 10)
+        L2 = Label(Webs8, text = "Points:")
+        E2 = Entry(Webs8, bd = 10)
+        option = OptionMenu(Webs8, var, '10', '20', '50', '75')
+        StBasilsCathedral.points = var.get()
+        buttondone = Button(Webs8, text = "Done", command = Close)
+        labeltreasure = Label(text="St Basils Cathedral:"+str(var.get()) ,fg="black",bg="white").place(x=750,y=630)
+        
+
+    L1.pack()
+    E1.pack()
+    L2.pack()
+    option.pack()
+    buttondone.pack()
+
+
+
+def Close():
+    global number
+    global namenotstring
+
+
+#nearly there .get currently doesn't return anything
+
+    namenotstring.treasure = str(E1.get())
+    namenotstring.points = str(var.get())
+    
+    if number == 0:
+        Webs.withdraw()
+        number = number + 1
+        Webs1.deiconify()
+        CreateWindow("Sphinx", Sphinx, 1)
+       
+    elif number == 1:
+        Webs1.withdraw()
+        number = number + 1
+        Webs2.deiconify()
+        CreateWindow("Valley of the Kings", ValleyoftheKings, 2)
+     
+    elif number == 2:
+        Webs2.withdraw()
+        number = number + 1
+        Webs3.deiconify()
+        CreateWindow("London Eye", LondonEye, 3)
+    elif number == 3:
+        Webs3.withdraw()
+        number = number + 1
+        Webs4.deiconify()
+        CreateWindow("Statue of Liberty", StatueofLiberty, 4)
+    elif number == 4:
+        Webs4.withdraw()
+        number = number + 1
+        Webs5.deiconify()
+        CreateWindow("Eiffel Tower", EiffelTower, 5)
+    elif number == 5:
+        Webs5.withdraw()
+        number = number + 1
+        Webs6.deiconify()
+        CreateWindow("North Pole", NorthPole, 6)
+    elif number == 6:
+        Webs6.withdraw()
+        number = number + 1
+        Webs7.deiconify()
+        CreateWindow("Mount Everest", MountEverest, 7)
+    elif number == 7:
+        Webs7.withdraw()
+        number = number + 1
+        Webs8.deiconify()
+        CreateWindow("St Basils Cathedral", StBasilsCathedral, 8)
+    elif number == 8:
+        Webs8.withdraw()
+        number = number + 1
+
+def sort(my_list,length):
+    print my_list
+    for i in range(length):
+        for j in range(length-1):
+            if my_list[j]>my_list[j+1]:
+                temp=my_list[j]
+                my_list[j]=my_list[j+1]
+                my_list[j+1]=temp
+    print my_list
+
+
+namenotstring = Pyramid
+CreateWindow("Pyramid", Pyramid, 0)
+
+
+my_list=[Pyramid.points,Sphinx.points, ValleyoftheKings.points, LondonEye.points,StatueofLiberty.points, EiffelTower.points,NorthPole.points,MountEverest.points, StBasilsCathedral.points ]                    
+sort(my_list,len(my_list))
+
+window.mainloop()
