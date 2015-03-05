@@ -1,0 +1,12 @@
+def sort(my_list,length):
+    print my_list
+    for i in range(length):
+        for j in range(length-1):
+            if my_list[j]>my_list[j+1]:
+                temp=my_list[j]
+                my_list[j]=my_list[j+1]
+                my_list[j+1]=temp
+    print my_list
+
+my_list=[Pyramid.points,Sphinx.points, ValleyoftheKings.points, LondonEye.points,StatueofLiberty.points, EiffelTower.points,NorthPole.points,MountEverest.points, StBasilsCathedral.points ]                    ]
+sort(my_list,len(my_list))
