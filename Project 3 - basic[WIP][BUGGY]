@@ -128,7 +128,6 @@ Basil1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/BR1c
 Glacier1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6hnz3hX.gif").read()))
 
 Phil = Robot("Phil",1,0,0,0,0,0,"",0)
-Sebastion = Robot("Sebastion",2,0,0,0,0,0,"", 0)
 
 trap1 = Traps("Trap1","",1,0,0,0,0)
 trap2 = Traps("Trap2","",2,0,0,0,0)
@@ -175,9 +174,7 @@ StBasilsCathedral.location(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCat
 Glacier.location(Glacier.x1,Glacier.y1,Glacier.x2,Glacier.y2,Glacier.picture)
 
 atdestination = False
-Sebastion.direction = 0
 PhilDestination = Pyramid
-SebastionDestination = Sphinx
 itsatrap = trap1
 treasureCount = 6
 z = 0
@@ -197,18 +194,23 @@ while atdestination == False:
     elif Phil.y2 < PhilDestination.y2:
         Phil.direction = 3
 
-    if Sebastion.x1 > SebastionDestination.x1:
-        Sebastion.direction = 0
-    elif Sebastion.x1 < SebastionDestination.x1:
-        Sebastion.direction = 2
-    elif Sebastion.y1 > SebastionDestination.y1:
-        Sebastion.direction = 1
-    elif Sebastion.y2 < SebastionDestination.y2:
-        Sebastion.direction = 3
 
     Phil.RobotMove(Phil.x1,Phil.y1,Phil.x2,Phil.y2,Phil.position,Phil.direction)
     canvas.update()
 
+    if Phil.x1 >= trap1.x1 and Phil.y1 <= trap1.y1 and Phil.x2 <= trap1.x2 and Phil.y2 <= trap1.y2:
+        print "ITS A TRAP"
+    if Phil.x1 >= trap2.x1 and Phil.y1 <= trap2.y1 and Phil.x2 <= trap2.x2 and Phil.y2 <= trap2.y2:
+        print "ITS A TRAP"
+    if Phil.x1 >= trap3.x1 and Phil.y1 <= trap3.y1 and Phil.x2 <= trap3.x2 and Phil.y2 <= trap3.y2:
+        print "ITS A TRAP"
+    if Phil.x1 >= trap4.x1 and Phil.y1 <= trap4.y1 and Phil.x2 <= trap4.x2 and Phil.y2 <= trap4.y2:
+        print "ITS A TRAP"
+    if Phil.x1 >= trap5.x1 and Phil.y1 <= trap5.y1 and Phil.x2 <= trap5.x2 and Phil.y2 <= trap5.y2:
+        print "ITS A TRAP"
+    if Phil.x1 >= trap6.x1 and Phil.y1 <= trap6.y1 and Phil.x2 <= trap6.x2 and Phil.y2 <= trap6.y2:
+        print "ITS A TRAP"
+    
 
     if Phil.x1 == PhilDestination.x1 and Phil.y1 == PhilDestination.y1:
         n = PhilDestination.id
@@ -260,54 +262,6 @@ while atdestination == False:
         elif StBasilsCathedral.id == y:
             PhilDestination = StBasilsCathedral
             print "Calling At basil"
-        elif(Phil.x1 >= trap1.x1) and (Phil.y1 >= trap1.y1) or (Phil.x2 <= trap1.x2) and (Phil.y2 <= trap1.y2):
-            print "ITS A TRAP"
-        elif (Phil.x1 >= trap2.x1) and (Phil.y1 >= trap2.y1) or (Phil.x2 <= trap2.x2) and (Phil.y2 <= trap2.y2):
-            print "ITS A TRAP"
-        elif (Phil.x1 >= trap3.x1) and (Phil.y1 >= trap3.y1) or (Phil.x2 <= trap3.x2) and (Phil.y2 <= trap3.y2):
-            print "ITS A TRAP"
-        elif (Phil.x1 >= trap4.x1) and (Phil.y1 >= trap4.y1) or (Phil.x2 <= trap4.x2) and (Phil.y2 <= trap4.y2):
-            print "ITS A TRAP"
-        elif (Phil.x1 >= trap5.x1) and (Phil.y1 >= trap5.y1) or (Phil.x2 <= trap5.x2) and (Phil.y2 <= trap5.y2):
-            print "ITS A TRAP"
-        elif (Phil.x1 >= trap6.x1) and (Phil.y1 >= trap6.y1) or (Phil.x2 <= trap6.x2) and (Phil.y2 <= trap6.y2):
-            print "ITS A TRAP"
-
-
-    if Sebastion.x1 == SebastionDestination.x1 and Sebastion.y1 == SebastionDestination.y1:
-        n = SebastionDestination.id
-        nodes[n] = 0
-        
-        z = 0
-        x = True
-        while x == True:
-            z = z + 1
-            n = randint(0, 9)
-            y = nodes[n]
-            if y == 0:
-                x = True
-                if z == 50:
-                    x = False
-            else:
-                x = False
-        if Pyramid.id == y:
-            SebastionDestination = Pyramid
-        elif Sphinx.id == y:
-            SebastionDestinaton = Sphinx
-        elif ValleyoftheKings.id == y:
-            SebastionDestination = ValleyoftheKings
-        elif LondonEye.id == y:
-            SebastionDestination = LondonEye
-        elif StatueofLiberty.id == y:
-            SebastionDestination = StatueofLiberty
-        elif EiffelTower.id == y:
-            SebastionDestination = EiffelTower
-        elif NorthPole.id == y:
-            SebastionDestination = NorthPole
-        elif MountEverest.id == y:
-            SebastionDestination = MountEverest
-        elif StBasilsCathedral.id == y:
-            SebastionDestination = StBasilsCathedral
             
         atdestination = True
         for x in range(0, 12):
