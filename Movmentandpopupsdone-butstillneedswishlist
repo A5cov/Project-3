@@ -104,6 +104,31 @@ def increasenumber2():
     MountEverest.points = E82.get()
     StBasilsCathedral.points = E92.get()
     ChoicesPoints.withdraw()
+    ChoicesWishlist.deiconify()
+
+def increasenumber3():
+
+    atdestination = False
+    PhilDestination = Pyramid
+    LightColourOne = 1
+    LightColourTwo = 1
+    LightColourThree = 1
+    sf = 0
+    z = 0
+    L = 0
+    n = 0
+    holder = 1
+    nodes=[1,2,3,4,5,6,7,8,9]
+    length=8
+    Treasures = []
+    Wishlist = []
+
+    Wishlist.append(E13.get())
+    Wishlist.append(E23.get())
+    Wishlist.append(E33.get())
+    Wishlist.append(E43.get())
+    ChoicesWishlist.withdraw()
+    print Wishlist
     
     atdestination = False
     PhilDestination = Pyramid
@@ -358,5 +383,27 @@ option8.pack()
 button1.pack()
 ChoicesPoints.withdraw()
 
+Webs2 = Toplevel()
+ChoicesWishlist = Webs2
+ChoicesWishlist.title("                             Wishlist                        ")
+E13 = StringVar(ChoicesWishlist)
+E13.set(Pyramid.treasure)
+optionW1 = OptionMenu(ChoicesWishlist, E13, Pyramid.treasure, Sphinx.treasure, ValleyoftheKings.treasure, LondonEye.treasure, EiffelTower.treasure, StatueofLiberty.treasure, MountEverest.treasure, StBasilsCathedral.treasure, NorthPole.treasure)
+E23 = StringVar(ChoicesWishlist)
+E23.set(Pyramid.treasure)
+optionW2 = OptionMenu(ChoicesWishlist, E23, Pyramid.treasure, Sphinx.treasure, ValleyoftheKings.treasure, LondonEye.treasure, EiffelTower.treasure, StatueofLiberty.treasure, MountEverest.treasure, StBasilsCathedral.treasure, NorthPole.treasure)
+E33 = StringVar(ChoicesWishlist)
+E33.set(Pyramid.treasure)
+optionW3 = OptionMenu(ChoicesWishlist, E33, Pyramid.treasure, Sphinx.treasure, ValleyoftheKings.treasure, LondonEye.treasure, EiffelTower.treasure, StatueofLiberty.treasure, MountEverest.treasure, StBasilsCathedral.treasure, NorthPole.treasure)
+E43 = StringVar(ChoicesWishlist)
+E43.set(Pyramid.treasure)
+optionW4 = OptionMenu(ChoicesWishlist, E43, Pyramid.treasure, Sphinx.treasure, ValleyoftheKings.treasure, LondonEye.treasure, EiffelTower.treasure, StatueofLiberty.treasure, MountEverest.treasure, StBasilsCathedral.treasure, NorthPole.treasure)
+optionW1.pack()
+optionW2.pack()
+optionW3.pack()
+optionW4.pack()
+buttonw = Button(ChoicesWishlist, text = "Done", command = increasenumber3)
+buttonw.pack()
+ChoicesWishlist.withdraw()
 
 window.mainloop()
