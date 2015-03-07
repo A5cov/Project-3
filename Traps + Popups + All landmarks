@@ -1,0 +1,480 @@
+import time
+import random
+from random import randint
+from Tkinter import*
+import io
+import base64
+import Tkinter as tk
+from urllib2 import urlopen
+  
+class landmarks:
+    def __init__(self,name,id,treasure,x1,x2,y1,y2,picture):
+        self.name = name
+        self.id = id
+        self.treasure = treasure
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        self.picture = picture
+    def location(self,x1,y1,x2,y2,picture):
+        x1 = x1 + randint(0,283)
+        x2 = x2 + 20
+        y1 = randint(0,560)
+        y2 = y1 + 20
+        canvas.create_image(x1,y1,image=picture,anchor=NW)
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+    def locationlabel(self, x1, y1, name, id, treasure):
+        label = Label(text=name, fg="black",bg="white").place(x=x1,y=y1)
+        label = Label(text="ID: " + str(id), fg="black",bg="white").place(x=x1,y=y1+21)
+        label = Label(text="Treasures: " + str(treasure), fg="black",bg="white").place(x=x1,y=y1+42)
+
+class Traps:
+    def __init__(self,name,id,effect,x1,y1,x2,y2):
+        self.name = name
+        self.id = id
+        self.effect = effect
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+    def trapLocation(self, x1,y1,x2,y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        x1 = x1 + randint(0,293)
+        x2 = x1 + 20
+        y1 = randint(0,580)
+        y2 = y1 + 20
+        canvas.create_rectangle(x1,y1,x2,y2,outline="black",width=1)
+        canvas.update()
+
+class robots:
+    def __init__(self, name, treasure, x1, x2, y1, y2, position, direction, RobotColour):
+        self.name = name
+        self.treasure = treasure
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        self.position = position
+        self.direction = direction
+        self.RobotColour = RobotColour
+    def CreateRobot(self, x1, y1, x2, y2, position, RobotColour):
+        x1 = randint(0, 979)
+        x2 = x1 + 20
+        y1 = randint(0, 580)
+        y2 = y1 + 20
+        self.position=canvas.create_rectangle(x1,y1,x2,y2,fill=RobotColour,outline="black")
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+        canvas.update()
+    def FoundTreasure(self, Amount):
+        self.treasure = self.treasure + Amount
+    def RobotMove(self, x1, y1, x2, y2, position, direction):
+        if direction == 0:
+            canvas.coords(position,x1-1,y1,x2-1,y2)
+            self.x1 = x1 - 1
+            self.x2 = x2 - 1
+            time.sleep(0.01)
+        elif direction == 1:
+            canvas.coords(position,x1,y1-1,x2,y2-1)
+            self.y1 = y1 - 1
+            self.y2 = y2 - 1
+            time.sleep(0.01)
+        elif direction == 2:
+            canvas.coords(position,x1+1,y1,x2+1,y2)
+            self.x1 = x1 + 1
+            self.x2 = x2 + 1
+            time.sleep(0.01)
+        elif direction == 3:
+            canvas.coords(position,x1,y1+1,x2,y2+1)
+            self.y1 = y1 + 1
+            self.y2 = y2 + 1
+            time.sleep(0.01)
+
+def increasenumber():
+    Pyramid.treasure = str(E1.get())
+    Sphinx.treasure = str(E2.get())
+    ValleyoftheKings.treasure = str(E3.get())
+    GrandCanyon.treasure = str(E4.get())
+    LondonEye.treasure = str(E5.get())
+    StatueofLiberty.treasure = str(E6.get())
+    EiffelTower.treasure = str(E7.get())
+    BigBen.treasure = str(E8.get())
+    NorthPole.treasure = str(E9.get())
+    MountEverest.treasure = str(E10.get())
+    StBasilsCathedral.treasure = str(E11.get())
+    Glacier.treasure = str(E111.get())
+    ChoicesTreasure.withdraw()
+    ChoicesPoints.deiconify()
+
+
+def increasenumber2():
+    Pyramid.points = E12.get()
+    Sphinx.points = E22.get()
+    ValleyoftheKings.points = E32.get()
+    GrandCanyon.points = E42.get()
+    LondonEye.points = E52.get()
+    StatueofLiberty.points = E62.get()
+    EiffelTower.points = E72.get()
+    BigBen.points = E82.get()
+    NorthPole.points = E92.get()
+    MountEverest.points = E102.get()
+    StBasilsCathedral.points = E112.get()
+    Glacier.points = E122.get()
+    ChoicesPoints.withdraw()
+    
+    atdestination = False
+    PhilDestination = Pyramid
+    sf = 0
+    z = 0
+    L = 0
+    n = 0
+    holder = 1
+    nodes=[1,2,3,4,5,6,7,8,9,10,11,12]
+    length=8
+    Treasures = []
+ 
+    while atdestination == False:
+        if Phil.x1 > PhilDestination.x1:
+            Phil.direction = 0
+        elif Phil.x1 < PhilDestination.x1:
+            Phil.direction = 2
+        elif Phil.y1 > PhilDestination.y1:
+            Phil.direction = 1
+        elif Phil.y2 < PhilDestination.y2:
+            Phil.direction = 3
+ 
+        Phil.RobotMove(Phil.x1,Phil.y1,Phil.x2,Phil.y2,Phil.position,Phil.direction)
+        canvas.update()
+
+        if Phil.x1 == trap1.x1 and Phil.x2 == trap1.x2 and Phil.y1 == trap1.y1 and Phil.y2 == trap1.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        if Phil.x1 == trap2.x1 and Phil.x2 == trap2.x2 and Phil.y1 == trap2.y1 and Phil.y2 == trap2.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        if Phil.x1 == trap3.x1 and Phil.x2 == trap3.x2 and Phil.y1 == trap3.y1 and Phil.y2 == trap3.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        if Phil.x1 == trap4.x1 and Phil.x2 == trap4.x2 and Phil.y1 == trap4.y1 and Phil.y2 == trap4.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        if Phil.x1 == trap5.x1 and Phil.x2 == trap5.x2 and Phil.y1 == trap5.y1 and Phil.y2 == trap5.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        if Phil.x1 == trap6.x1 and Phil.x2 == trap6.x2 and Phil.y1 == trap6.y1 and Phil.y2 == trap6.y2:
+            print "ITS A TRAP"
+            Treasures.pop()
+        
+
+         
+        if Phil.x1 == PhilDestination.x1 and Phil.y1 == PhilDestination.y1:
+
+            if PhilDestination.id == Pyramid.id:
+                Treasures.append(Pyramid.treasure)
+                Pyramid.locationlabel(Pyramid.x1,Pyramid.y1,Pyramid.name,Pyramid.id,Pyramid.treasure)
+            elif PhilDestination.id == Sphinx.id:
+                Treasures.append(Sphinx.treasure)
+                Sphinx.locationlabel(Sphinx.x1,Sphinx.y1,Sphinx.name,Sphinx.id,Sphinx.treasure)
+            elif PhilDestination.id == ValleyoftheKings.id:
+                Treasures.append(ValleyoftheKings.treasure)
+                ValleyoftheKings.locationlabel(ValleyoftheKings.x1,ValleyoftheKings.y1,ValleyoftheKings.name,ValleyoftheKings.id,ValleyoftheKings.treasure)
+            elif PhilDestination.id == GrandCanyon.id:
+                Treasures.append(GrandCanyon.treasure)
+                GrandCanyon.locationlabel(GrandCanyon.x1,GrandCanyon.y1,GrandCanyon.name,GrandCanyon.id,GrandCanyon.treasure)
+            elif PhilDestination.id == LondonEye.id:
+                Treasures.append(LondonEye.treasure)
+                LondonEye.locationlabel(LondonEye.x1,LondonEye.y1,LondonEye.name,LondonEye.id,LondonEye.treasure)
+            elif PhilDestination.id == EiffelTower.id:
+                Treasures.append(EiffelTower.treasure)
+                EiffelTower.locationlabel(EiffelTower.x1,EiffelTower.y1,EiffelTower.name,EiffelTower.id,EiffelTower.treasure)
+            elif PhilDestination.id == StatueofLiberty.id:
+                Treasures.append(StatueofLiberty.treasure)
+                StatueofLiberty.locationlabel(StatueofLiberty.x1,StatueofLiberty.y1,StatueofLiberty.name,StatueofLiberty.id,StatueofLiberty.treasure)
+            elif PhilDestination.id == BigBen.id:
+                Treasures.append(BigBen.treasure)
+                BigBen.locationlabel(BigBen.x1,BigBen.y1,BigBen.name,BigBen.id,BigBen.treasure)
+            elif PhilDestination.id == StBasilsCathedral.id:
+                Treasures.append(StBasilsCathedral.treasure)
+                StBasilsCathedral.locationlabel(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCathedral.name,StBasilsCathedral.id,StBasilsCathedral.treasure)
+            elif PhilDestination.id == MountEverest.id:
+                Treasures.append(MountEverest.treasure)
+                MountEverest.locationlabel(MountEverest.x1,MountEverest.y1,MountEverest.name,MountEverest.id,MountEverest.treasure)
+            elif PhilDestination.id == NorthPole.id:
+                Treasures.append(NorthPole.treasure)
+                NorthPole.locationlabel(NorthPole.x1,NorthPole.y1,NorthPole.name,NorthPole.id,NorthPole.treasure)
+            elif PhilDestination.id == Glacier.id:
+                Treasures.append(Glacier.treasure)
+                Glacier.locationlabel(Glacier.x1,Glacier.y1,Glacier.name,Glacier.id,Glacier.treasure)
+         
+            L = PhilDestination.id
+            x = True
+            try:
+                n = nodes.index(L)
+                del nodes[n]
+            except:
+                x = True
+             
+            z = len(nodes)
+            z = z - 1
+        
+            while x == True:
+                if z < 1:
+                    x = False
+                    sf = sf + 1
+                    y = 2
+                    PhilDestination = Sphinx
+                    if sf > 1:
+                        atdestination = True
+                else:
+                    n = randint(0, z)
+                    y = nodes[n]
+                    x = False
+ 
+         
+            if Pyramid.id == y:
+                PhilDestination = Pyramid
+            elif Sphinx.id == y:
+                PhilDestinaton = Sphinx
+            elif ValleyoftheKings.id == y:
+                PhilDestination = ValleyoftheKings
+            elif GrandCanyon.id == y:
+                PhilDestination = GrandCanyon
+            elif LondonEye.id == y:
+                PhilDestination = LondonEye
+            elif StatueofLiberty.id == y:
+                PhilDestination = StatueofLiberty
+            elif EiffelTower.id == y:
+                PhilDestination = EiffelTower
+            elif BigBen.id == y:
+                PhilDestination = BigBen
+            elif NorthPole.id == y:
+                PhilDestination = NorthPole
+            elif MountEverest.id == y:
+                PhilDestination = MountEverest
+            elif StBasilsCathedral.id == y:
+                PhilDestination = StBasilsCathedral
+            elif Glacier.id == y:
+                PhilDestination = Glacier
+
+
+  
+window = Tk()
+canvas = Canvas(window, width=999, height=650, bg='white')
+desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))
+city = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/X6xnrbm.gif").read()))
+snow = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/2ICSPuc.gif").read()))
+canvas.create_image(0,0,image=desert, anchor=NW)
+canvas.create_image(333,0,image=city, anchor=NW)
+canvas.create_image(666,0,image=snow, anchor=NW)
+canvas.create_rectangle(0,600,999,650,fill='white')
+canvas.create_line(0,600,999,600)
+canvas.create_line(500,600,500,650)
+labelPhilPoints = Label(text="Phil's Points: ",fg="black",bg="white").place(x=30,y=610)
+canvas.pack()
+  
+  
+#Images thanks to Drago Art
+
+Pyramid1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/SXN9yaL.gif").read()))
+Sphinx1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/BzA9MTn.gif").read()))
+Valley1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/LzXQAOL.gif").read()))
+GrandCanyon1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/mZsZMUG.gif").read()))
+LondonEye1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/M1SzaWE.gif").read()))
+Statue1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/sFE9F00.gif").read()))
+Eiffel1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/R6EyJ2E.gif").read()))
+BigBen1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/IMDhEcQ.gif").read()))
+NorthPole1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/wLyWIcF.gif").read()))
+Everest1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8QrkshL.gif").read()))
+Basil1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/BR1c4oF.gif").read()))
+Glacier1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6hnz3hX.gif").read()))
+ 
+Phil = robots("Phil", 0, 0, 0, 0, 0, "", 0, "Blue")
+
+trap1 = Traps("Trap1","",1,0,0,0,0)
+trap2 = Traps("Trap2","",2,0,0,0,0)
+trap3 = Traps("Trap3","",3,333,0,0,0)
+trap4 = Traps("Trap4","",4,333,0,0,0)
+trap5 = Traps("Trap5","",5,666,0,0,0)
+trap6 = Traps("Trap6","",6,666,0,0,0)
+
+Pyramid = landmarks("Pyramid", 1, 0, 0, 0, 0, 0, Pyramid1)
+Sphinx = landmarks("Sphinx", 2, 0, 0, 0, 0, 0, Sphinx1)
+ValleyoftheKings = landmarks("Valley of the Kings", 3, 0, 0, 0, 0, 0, Valley1)
+GrandCanyon = landmarks("Grand Canyon", 4, 0, 0, 0, 0, 0, GrandCanyon1)
+LondonEye = landmarks("London Eye", 5, 0, 333, 0, 0, 0, LondonEye1)
+StatueofLiberty = landmarks("Statue of Liberty", 6, 0, 333, 0, 0, 0, Statue1)
+EiffelTower = landmarks("Eiffel Tower", 7, 0, 333, 0, 0, 0, Eiffel1)
+BigBen = landmarks("Big Ben", 8, 0, 333, 0, 0, 0, BigBen1)
+NorthPole = landmarks("North Pole", 9, 0, 666, 0, 0, 0, NorthPole1)
+MountEverest = landmarks("Mount Everest", 10, 0, 666, 0, 0, 0, Everest1)
+StBasilsCathedral = landmarks("St.Basil's Cathedral", 11, 0, 666, 0, 0, 0, Basil1)
+Glacier = landmarks("Glacier", 12, 0, 666, 0, 0, 0, Glacier1)
+
+trap1.trapLocation(trap1.x1,trap1.y1,trap1.x2,trap1.y2)
+trap2.trapLocation(trap2.x1,trap2.y1,trap2.x2,trap2.y2)
+trap3.trapLocation(trap3.x1,trap3.y1,trap3.x2,trap3.y2)
+trap4.trapLocation(trap4.x1,trap4.y1,trap4.x2,trap4.y2)
+trap5.trapLocation(trap5.x1,trap5.y1,trap5.x2,trap5.y2)
+trap6.trapLocation(trap6.x1,trap6.y1,trap6.x2,trap6.y2)
+ 
+Phil.CreateRobot(0,0,0,0, "", "Blue")
+Pyramid.location(Pyramid.x1,Pyramid.y1,Pyramid.x2,Pyramid.y2,Pyramid.picture)
+Sphinx.location(Sphinx.x1,Sphinx.y1,Sphinx.x2,Sphinx.y2,Sphinx.picture)
+ValleyoftheKings.location(ValleyoftheKings.x1,ValleyoftheKings.y1,ValleyoftheKings.x2,ValleyoftheKings.y2,ValleyoftheKings.picture)
+GrandCanyon.location(GrandCanyon.x1,GrandCanyon.y1,GrandCanyon.x2,GrandCanyon.y2,GrandCanyon.picture)
+LondonEye.location(LondonEye.x1,LondonEye.y1,LondonEye.x2,LondonEye.y2,LondonEye.picture)
+StatueofLiberty.location(StatueofLiberty.x1,StatueofLiberty.y1,StatueofLiberty.x2,StatueofLiberty.y2,StatueofLiberty.picture)
+EiffelTower.location(EiffelTower.x1,EiffelTower.y1,EiffelTower.x2,EiffelTower.y2,EiffelTower.picture)
+BigBen.location(BigBen.x1,BigBen.y1,BigBen.x2,BigBen.y2,BigBen.picture)
+NorthPole.location(NorthPole.x1,NorthPole.y1,NorthPole.x2,NorthPole.y2,NorthPole.picture)
+MountEverest.location(MountEverest.x1,MountEverest.y1,MountEverest.x2,MountEverest.y2,MountEverest.picture)
+StBasilsCathedral.location(StBasilsCathedral.x1,StBasilsCathedral.y1,StBasilsCathedral.x2,StBasilsCathedral.y2,StBasilsCathedral.picture)
+Glacier.location(Glacier.x1,Glacier.y1,Glacier.x2,Glacier.y2,Glacier.picture)
+
+number = 0
+Webs = Toplevel()
+ChoicesTreasure = Webs
+ChoicesTreasure.title("Treasure")
+L1 = Label(ChoicesTreasure, text = "                                      Pyramid                                            ")
+L2 = Label(ChoicesTreasure, text = "Sphinx")
+L3 = Label(ChoicesTreasure, text = "Valley of the Kings")
+L4 = Label(ChoicesTreasure, text = "Grand Canyon")
+L5 = Label(ChoicesTreasure, text = "London Eye")
+L6 = Label(ChoicesTreasure, text = "Statue of Liberty")
+L7 = Label(ChoicesTreasure, text = "Eiffel Tower")
+L8 = Label(ChoicesTreasure, text = "Big Ben")
+L9 = Label(ChoicesTreasure, text = "North Pole")
+L10 = Label(ChoicesTreasure, text = "Mount Everest")
+L11 = Label(ChoicesTreasure, text = "St Basils Cathedral")
+L12 = Label(ChoicesTreasure, text = "Glacier")
+E1 = Entry(ChoicesTreasure, bd = 10)
+E2 = Entry(ChoicesTreasure, bd = 10)
+E3 = Entry(ChoicesTreasure, bd = 10)
+E4 = Entry(ChoicesTreasure, bd = 10)
+E5 = Entry(ChoicesTreasure, bd = 10)
+E6= Entry(ChoicesTreasure, bd = 10)
+E7 = Entry(ChoicesTreasure, bd = 10)
+E8 = Entry(ChoicesTreasure, bd = 10)
+E9 = Entry(ChoicesTreasure, bd = 10)
+E10 = Entry(ChoicesTreasure, bd = 10)
+E11 = Entry(ChoicesTreasure, bd = 10)
+E111 = Entry(ChoicesTreasure, bd = 10)
+button = Button(ChoicesTreasure, text = "Done", command = increasenumber)
+L1.pack()
+E1.pack()
+L2.pack()
+E2.pack()
+L3.pack()
+E3.pack()
+L4.pack()
+E4.pack()
+L5.pack()
+E5.pack()
+L6.pack()
+E6.pack()
+L7.pack()
+E7.pack()
+L8.pack()
+E8.pack()
+L9.pack()
+E9.pack()
+L10.pack()
+E10.pack()
+L11.pack()
+E11.pack()
+L12.pack()
+E111.pack()
+button.pack()
+
+Webs1 = Toplevel()
+ChoicesPoints = Webs1
+ChoicesPoints.title("Points")
+L12 = Label(ChoicesPoints, text = "                                      Pyramid                                            ")
+L22 = Label(ChoicesPoints, text = "Sphinx")
+L32 = Label(ChoicesPoints, text = "Valley of the Kings")
+L42 = Label(ChoicesPoints, text = "Grand Canyon")
+L52 = Label(ChoicesPoints, text = "London Eye")
+L62 = Label(ChoicesPoints, text = "Statue of Liberty")
+L72 = Label(ChoicesPoints, text = "Eiffel Tower")
+L82 = Label(ChoicesPoints, text = "Big Ben")
+L92 = Label(ChoicesPoints, text = "North Pole")
+L102 = Label(ChoicesPoints, text = "Mount Everest")
+L112 = Label(ChoicesPoints, text = "St Basils Cathedral")
+L122 = Label(ChoicesPoints, text = "Glacier")
+
+E12 = StringVar(ChoicesPoints)
+E12.set("10")
+option = OptionMenu(ChoicesPoints, E12, "10", "20", "50", "75") 
+E22 = StringVar(ChoicesPoints)
+E22.set("10")
+option1 = OptionMenu(ChoicesPoints, E22, "10", "20", "50", "75") 
+E32 = StringVar(ChoicesPoints)
+E32.set("10")
+option2 = OptionMenu(ChoicesPoints, E32, "10", "20", "50", "75") 
+E42 = StringVar(ChoicesPoints)
+E42.set("10")
+option3 = OptionMenu(ChoicesPoints, E42, "10", "20", "50", "75") 
+E52 = StringVar(ChoicesPoints)
+E52.set("10")
+option4 = OptionMenu(ChoicesPoints, E52, "10", "20", "50", "75") 
+E62 = StringVar(ChoicesPoints)
+E62.set("10")
+option5 = OptionMenu(ChoicesPoints, E62, "10", "20", "50", "75") 
+E72 = StringVar(ChoicesPoints)
+E72.set("10")
+option6 = OptionMenu(ChoicesPoints, E72, "10", "20", "50", "75") 
+E82 = StringVar(ChoicesPoints)
+E82.set("10")
+option7 = OptionMenu(ChoicesPoints, E82, "10", "20", "50", "75") 
+E92 = StringVar(ChoicesPoints)
+E92.set("10")
+option8 = OptionMenu(ChoicesPoints, E92, "10", "20", "50", "75")  
+E102 = StringVar(ChoicesPoints)
+E102.set("10")
+option9 = OptionMenu(ChoicesPoints, E102, "10", "20", "50", "75") 
+E112 = StringVar(ChoicesPoints)
+E112.set("10")
+option10 = OptionMenu(ChoicesPoints, E102, "10", "20", "50", "75") 
+E122 = StringVar(ChoicesPoints)
+E122.set("10")
+option11 = OptionMenu(ChoicesPoints, E112, "10", "20", "50", "75") 
+button1 = Button(ChoicesPoints, text = "Done", command = increasenumber2)
+L12.pack()
+option.pack()
+L22.pack()
+option1.pack()
+L32.pack()
+option2.pack()
+L42.pack()
+option3.pack()
+L52.pack()
+option4.pack()
+L62.pack()
+option5.pack()
+L72.pack()
+option6.pack()
+L82.pack()
+option7.pack()
+L92.pack()
+option8.pack()
+L102.pack()
+option9.pack()
+L112.pack()
+option10.pack()
+L122.pack()
+option11.pack()
+button1.pack()
+ChoicesPoints.withdraw()
+
+
+window.mainloop()
