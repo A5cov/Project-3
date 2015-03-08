@@ -32,7 +32,7 @@ class landmarks:
         label = Label(text=name, fg="black",bg="white").place(x=x1,y=y1)
         label = Label(text="ID: " + str(id), fg="black",bg="white").place(x=x1,y=y1+21)
         label = Label(text="Treasures: " + str(treasure), fg="black",bg="white").place(x=x1,y=y1+42)
-
+#Traps class so that we are able to call and create the traps
 class Traps:
     def __init__(self,name,id,effect,x1,y1,x2,y2):
         self.name = name
@@ -156,6 +156,7 @@ def increasenumber2():
         Phil.RobotMove(Phil.x1,Phil.y1,Phil.x2,Phil.y2,Phil.position,Phil.direction)
         canvas.update()
 
+#if statements to identify the robot within the traps location so it can take the treasure out from the list
         if Phil.x1 == trap1.x1 and Phil.x2 == trap1.x2 and Phil.y1 == trap1.y1 and Phil.y2 == trap1.y2:
             print "ITS A TRAP"
             Treasures.pop()
@@ -300,6 +301,7 @@ Glacier1 = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/6h
  
 Phil = robots("Phil", 0, 0, 0, 0, 0, "", 0, "Blue")
 
+#traps being called from the function into a variable
 trap1 = Traps("Trap1","",1,0,0,0,0)
 trap2 = Traps("Trap2","",2,0,0,0,0)
 trap3 = Traps("Trap3","",3,333,0,0,0)
@@ -320,6 +322,7 @@ MountEverest = landmarks("Mount Everest", 10, 0, 666, 0, 0, 0, Everest1)
 StBasilsCathedral = landmarks("St.Basil's Cathedral", 11, 0, 666, 0, 0, 0, Basil1)
 Glacier = landmarks("Glacier", 12, 0, 666, 0, 0, 0, Glacier1)
 
+#variable used to create the traps from a function within the traps class
 trap1.trapLocation(trap1.x1,trap1.y1,trap1.x2,trap1.y2)
 trap2.trapLocation(trap2.x1,trap2.y1,trap2.x2,trap2.y2)
 trap3.trapLocation(trap3.x1,trap3.y1,trap3.x2,trap3.y2)
