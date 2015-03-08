@@ -1,0 +1,59 @@
+import sys
+from Tkinter import *
+import os
+mGui = Tk()
+
+
+def openFile():
+    os.startfile("C:/Users/User/Desktop/Project 3/basicCode.py")
+
+def openFile2():
+    os.startfile("C:/Users/User/Desktop/Project 3/intermediateCode.py")
+
+def openFile3():
+    os.startfile("C:/Users/User/Desktop/Project 3/advancedCode.py")
+
+def openFile4():
+    os.startfile("C:/Users/User/Desktop/sound.py")
+
+
+
+
+mGui.geometry("450x450+400+150")
+mGui.title("Main Menu")
+
+mLabel = Label(text="Select Level")
+mLabel.pack()
+
+mLabel2 = Label(text="    ")
+mLabel2.pack()
+
+mButton = Button(text="Basic", command = openFile)
+mButton.pack()
+
+mLabel3 = Label(text="    ")
+mLabel3.pack()
+
+mButton2 = Button(text="Intermediate", command = openFile2)
+mButton2.pack()
+
+mLabel4 = Label(text="    ")
+mLabel4.pack()
+
+mButton3 = Button(text="Advanced", command = openFile3)
+mButton3.pack()
+
+mLabel4 = Label(text="    ")
+mLabel4.pack()
+
+mLabel4 = Label(text="    ")
+mLabel4.pack()
+
+mLabel4 = Label(text="    ")
+mLabel4.pack()
+
+mButton4 = Button(text="Play Music", command = openFile)
+mButton4.pack()
+
+
+mainloop()
