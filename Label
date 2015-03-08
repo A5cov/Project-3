@@ -1,4 +1,4 @@
-import time
+import time                                         #Libraries
 import random
 from random import randint
 from Tkinter import*
@@ -7,9 +7,9 @@ import base64
 import Tkinter as tk
 from urllib2 import urlopen
 
-class landmarks:
+class landmarks:                                                    #Creating Landmarks
     def __init__(self,name,id,treasure,x1,x2,y1,y2,picture):
-        self.name = name
+        self.name = name                                            #Attributes
         self.id = id
         self.treasure = treasure
         self.x1 = x1
@@ -17,33 +17,33 @@ class landmarks:
         self.y1 = y1
         self.y2 = y2
         self.picture = picture
-    def location(self,x1,y1,x2,y2,picture):
+    def location(self,x1,y1,x2,y2,picture):                         #Giving landmarks specific locations
         x1 = x1 + randint(0,293)
         x2 = x2 + 20
         y1 = randint(0,580)
         y2 = y1 + 20
-        canvas.create_image(x1,y1,image=picture,anchor=NW)
+        canvas.create_image(x1,y1,image=picture,anchor=NW)          #Base code for inserting Landmark images
         self.x1 = x1
         self.x2 = x2
         self.y1 = y1
         self.y2 = y2
         canvas.update()
-    def locationlabel(self, x1, y1, name, id, treasure):
-        label = Label(text=name, fg="black",bg="white").place(x=x1,y=y1)
+    def locationlabel(self, x1, y1, name, id, treasure):            #Labels to pop up when robot reaches them 
+        label = Label(text=name, fg="black",bg="white").place(x=x1,y=y1)    #Label Apperance and positioning
         label = Label(text="ID: " + str(id), fg="black",bg="white").place(x=x1,y=y1+21)
         label = Label(text="Treasures: " + str(treasure), fg="black",bg="white").place(x=x1,y=y1+42)
 
 #Traps class so that we are able to call and create the traps
-class Traps:
+class Traps:                                                        #Creating traps
     def __init__(self,name,id,effect,x1,y1,x2,y2):
-        self.name = name
+        self.name = name                                            #Attributes
         self.id = id
         self.effect = effect
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
-    def trapLocation(self, x1,y1,x2,y2):
+    def trapLocation(self, x1,y1,x2,y2):                            #Location of Traps
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
@@ -55,9 +55,9 @@ class Traps:
         canvas.create_rectangle(x1,y1,x2,y2,outline="black",width=1)
         canvas.update()
         
-class robots:
+class robots:                                                               #Robot class
     def __init__(self, name, treasure, x1, x2, y1, y2, position, direction, RobotColour):
-        self.name = name
+        self.name = name                                                    #Robot Attributes
         self.treasure = treasure
         self.x1 = x1
         self.x2 = x2
@@ -66,7 +66,7 @@ class robots:
         self.position = position
         self.direction = direction
         self.RobotColour = RobotColour
-    def CreateRobot(self, x1, y1, x2, y2, position, RobotColour, text):
+    def CreateRobot(self, x1, y1, x2, y2, position, RobotColour, text):     #Creating robot
         x1 = randint(0, 979)
         x2 = x1 + 20
         y1 = randint(0, 580)
@@ -76,33 +76,33 @@ class robots:
         self.x2 = x2
         self.y1 = y1
         self.y2 = y2
-        self.text=Label(text="Phil",fg="black",bg="white")
+        self.text=Label(text="Phil",fg="black",bg="white")                  #Robot Label
         canvas.update()
     def FoundTreasure(self, Amount):
         self.treasure = self.treasure + Amount
-    def RobotMove(self, x1, y1, x2, y2, position, direction):
-        if direction == 0:
+    def RobotMove(self, x1, y1, x2, y2, position, direction):               #Robot Directions
+        if direction == 0:                                                  #Left
             canvas.coords(position,x1-1,y1,x2-1,y2)
             self.x1 = x1 - 1
             self.x2 = x2 - 1
             time.sleep(0.01)
-        elif direction == 1:
+        elif direction == 1:                                                #Right
             canvas.coords(position,x1,y1-1,x2,y2-1)
             self.y1 = y1 - 1
             self.y2 = y2 - 1
             time.sleep(0.01)
-        elif direction == 2:
+        elif direction == 2:                                                #Down
             canvas.coords(position,x1+1,y1,x2+1,y2)
             self.x1 = x1 + 1
             self.x2 = x2 + 1
             time.sleep(0.01)
-        elif direction == 3:
+        elif direction == 3:                                                #Up
             canvas.coords(position,x1,y1+1,x2,y2+1)
             self.y1 = y1 + 1
             self.y2 = y2 + 1
             time.sleep(0.01)
             
-def increasenumber():
+def increasenumber():                                   #Landmark and Treasure Wishlist
     Pyramid.treasure = str(E1.get())
     Sphinx.treasure = str(E2.get())
     ValleyoftheKings.treasure = str(E3.get())
@@ -234,7 +234,7 @@ def increasenumber3():
          
         if Phil.x1 == PhilDestination.x1 and Phil.y1 == PhilDestination.y1:
 
-            if PhilDestination.id == Pyramid.id:
+            if PhilDestination.id == Pyramid.id:                                                #Labels of Landmarks show when Robot is at landmark
                 Treasures.append(Pyramid.treasure)
                 Pyramid.locationlabel(Pyramid.x1,Pyramid.y1,Pyramid.name,Pyramid.id,Pyramid.treasure)
             elif PhilDestination.id == Sphinx.id:
@@ -321,7 +321,7 @@ def increasenumber3():
                 
 window = Tk()
 canvas = Canvas(window, width=999, height=650, bg='white')
-desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))
+desert = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/8Ui3Nn2.gif").read()))          #Background images
 city = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/X6xnrbm.gif").read()))
 snow = tk.PhotoImage(data=base64.encodestring(urlopen("http://i.imgur.com/2ICSPuc.gif").read()))
 
